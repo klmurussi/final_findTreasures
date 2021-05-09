@@ -1,0 +1,33 @@
+[data-md-color-primary="deep-purple"] .md-header {
+    background-color: white !important;
+}
+
+.md-logo img {
+    width: auto !important;
+    height: 35px !important;
+    margin: 0 !important;
+}
+
+.md-header-nav__button {
+    margin: 0;
+}
+
+.md-main {
+    background-color: whitesmoke;
+}
+
+.md-typeset table:not([class]) th {
+    background-color: rgb(185,85,200);
+}
+
+.md-search__input{
+    background-color: rgb(150,60,170);
+    border: 1px;
+    border-radius: 1rem;
+    border-color: black;
+}
+
+.md-search__input:hover {
+    background-color: rgba(150,60,170,0.5);
+}
+
