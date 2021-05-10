@@ -16,7 +16,7 @@ myfont = pg.font.SysFont('Comic Sans MS', 30)
 
 graph = Graph.Graph()
 (start, end) = CreateGraph.nodes(graph)
-CreateGraph.treasures(graph)
+#CreateGraph.treasures(graph)
 
 CreateEdges.edges(graph, start, end)
 distance = graph.dijkstra_end(start, end)
