@@ -1,7 +1,7 @@
 import pygame as pg
 import random as rand
 import sys
-from tools import Images, Settings, Sprites, CreateGraph, CreateEdges, CreateTreasures
+from tools import Images, Settings, Sprites, CreateGraph, CreateEdges, CreateTreasures, knapsack
 from classes import Graph, InputBox
 from math import inf
 
@@ -28,13 +28,15 @@ while distance == inf:
 #print("distancia", distance)
 qtd = graph.qtdTreasures()
 
+weight = str(rand.randint(30, 50))
+
+res = knapsack.k(int(weight), graph.treasures, qtd)
+
 input_box1 = InputBox.InputBox(0, 550, 140, 32)
 input_boxes = [input_box1]
 done = False
-done1 = False
-done2 = False
 
-weight = str(rand.randint(30, 50))
+peso = 0
 
 while done == False:
     screen.fill(Settings.BLACK)
@@ -55,45 +57,77 @@ while done == False:
     posY = 90
     screen.blit(textsurface, (posX, posY))
     
-    while done1 == False:
-        text = "Confirmar"
-        textsurface = myfont.render(text, False, (255, 255, 255))
-        posX = 690
-        posY = 560
-        confirmar = pg.Rect(posX, posY, 150, 30)
-        screen.blit(textsurface, (posX, posY))
-        for i in graph.treasures:
-            if i.print == True:
-                pg.draw.circle(screen, Settings.BLUE, i.pos, 40)
-        Sprites.treasure_list.draw(screen)
-        graph.draw(screen)
-        for event in pg.event.get():
+
+    text = "Confirmar"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 690
+    posY = 560
+    confirmar = pg.Rect(posX, posY, 150, 30)
+    screen.blit(textsurface, (posX, posY))
+    for i in graph.treasures:
+        if i.print == True:
+            pg.draw.circle(screen, Settings.BLUE, i.pos, 40)
+    Sprites.treasure_list.draw(screen)
+    graph.draw(screen)
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            sys.exit()
+        if event.type == pg.MOUSEBUTTONUP:
+            if confirmar.collidepoint(event.pos):
+                if (peso <= int (weight)):
+                    done = True
+            for i in graph.treasures:
+                if i.button.collidepoint(event.pos):
+                    if (i.print == True):
+                        i.print = False
+                        peso = peso - i.peso
+                    else:
+                        i.print = True
+                        peso = peso + i.peso
+    pg.display.update()
+
+done = False
+
+while done == False:
+    screen.fill(Settings.BLACK)
+    text = "As melhores opções são azuis"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 10
+    posY = 20
+    screen.blit(textsurface, (posX, posY))
+    text = "As que você escolheu são opções são verdes"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 10
+    posY = 50
+    screen.blit(textsurface, (posX, posY))
+    text = "As que você escolheu e é uma das melhores opções são vermelhas"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 10
+    posY = 80
+    screen.blit(textsurface, (posX, posY))
+    for i in res.treasures:
+        pg.draw.circle(screen, Settings.BLUE, i.pos, 40)
+    for i in graph.treasures:
+        if i.print == True:
+            pg.draw.circle(screen, Settings.GREEN, i.pos, 40)
+            for n in res.treasures:
+                if i.num == n.num:
+                    pg.draw.circle(screen, Settings.RED, i.pos, 40)
+    Sprites.treasure_list.draw(screen)
+    graph.premio(screen)
+    for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
             if event.type == pg.MOUSEBUTTONUP:
-                if confirmar.collidepoint(event.pos):
-                    done1 = True
-                for i in graph.treasures:
-                    if i.button.collidepoint(event.pos):
-                        if (i.print == True):
-                            i.print = False
-                        else:
-                            i.print = True
-        pg.display.update()
+                done = True
 
-    while done2 == False:
-        screen.fill(Settings.BLACK)
-        Sprites.treasure_list.draw(screen)
-        graph.premio(screen)
-        for event in pg.event.get():
-                if event.type == pg.QUIT:
-                    pg.quit()
-                    sys.exit()
-                if event.type == pg.MOUSEBUTTONUP:
-                    done = True
-
-        pg.display.update()
+    pg.display.update()
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            sys.exit()
 
 while True:
     #RUN

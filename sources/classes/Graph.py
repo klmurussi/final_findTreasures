@@ -13,7 +13,7 @@ class Graph:
         self.graph = {}
         self.weights = {}
         self.qtd = 0
-        self.treasures = {}
+        self.treasures = []
         #self.buttons = {}
 
     def add_node(self, num, x, y):
@@ -23,9 +23,12 @@ class Graph:
 
     def add_treasure(self, num, x, y, peso, premio):
         empty_node = Treasure.Treasure(num, x, y, peso, premio)
-        self.treasures[empty_node] = []
+        self.treasures.append(empty_node)
         self.qtd = self.qtd + 1
         return empty_node
+
+    def add (self, treasure):
+        self.treasures.append(treasure)
 
     def add_edge(self, src, dest, weight):
         if (dest in self.graph[src]):
@@ -75,11 +78,6 @@ class Graph:
             posX = i.rect.x - 20
             posY = i.rect.y + 15
             screen.blit(textsurface, (posX, posY))
-
-    def buttons (self, pos, screen, color):
-        for i in self.treasures:
-            if i.button.collidepoint(pos):
-                pg.draw.cicle(screen, color, pos, 20)
 
     def qtdTreasures (self):
         return self.qtd
