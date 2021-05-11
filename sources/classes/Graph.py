@@ -3,21 +3,28 @@ import random
 from tools import Sprites
 from pythonds import PriorityQueue
 from math import inf
+import pygame as pg 
 
+pg.font.init()
+myfont = pg.font.SysFont('Comic Sans MS', 30)
 
 class Graph:
     def __init__(self):
         self.graph = {}
         self.weights = {}
+        self.qtd = 0
+        self.treasures = {}
+        #self.buttons = {}
 
     def add_node(self, num, x, y):
         empty_node = Node.Node(num, x, y)
         self.graph[empty_node] = []
         return empty_node
 
-    def add_treasure(self, num, x, y):
-        empty_node = Treasure.Treasure(num, x, y)
-        self.graph[empty_node] = []
+    def add_treasure(self, num, x, y, peso, premio):
+        empty_node = Treasure.Treasure(num, x, y, peso, premio)
+        self.treasures[empty_node] = []
+        self.qtd = self.qtd + 1
         return empty_node
 
     def add_edge(self, src, dest, weight):
@@ -52,3 +59,27 @@ class Graph:
                     pq.decreaseKey(nextVert, newDist)
                     pq.add((newDist, nextVert))
         return distance[end]
+
+    def draw (self, screen):
+        for i in self.treasures:
+            text = str(i.peso)
+            textsurface = myfont.render(text, False, (255,255,255))
+            posX = i.rect.x - 20
+            posY = i.rect.y + 15
+            screen.blit(textsurface, (posX, posY))
+
+    def premio (self, screen):
+        for i in self.treasures:
+            text = str(i.premio)
+            textsurface = myfont.render(text, False, (255,255,255))
+            posX = i.rect.x - 20
+            posY = i.rect.y + 15
+            screen.blit(textsurface, (posX, posY))
+
+    def buttons (self, pos, screen, color):
+        for i in self.treasures:
+            if i.button.collidepoint(pos):
+                pg.draw.cicle(screen, color, pos, 20)
+
+    def qtdTreasures (self):
+        return self.qtd
