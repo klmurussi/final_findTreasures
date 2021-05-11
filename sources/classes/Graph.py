@@ -14,6 +14,7 @@ class Graph:
         self.weights = {}
         self.qtd = 0
         self.treasures = []
+        self.total = 0
         #self.buttons = {}
 
     def add_node(self, num, x, y):
@@ -29,6 +30,7 @@ class Graph:
 
     def add (self, treasure):
         self.treasures.append(treasure)
+        self.total = treasure.premio + self.total
 
     def add_edge(self, src, dest, weight):
         if (dest in self.graph[src]):

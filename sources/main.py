@@ -37,6 +37,7 @@ input_boxes = [input_box1]
 done = False
 
 peso = 0
+premio = 0
 
 while done == False:
     screen.fill(Settings.BLACK)
@@ -82,9 +83,11 @@ while done == False:
                     if (i.print == True):
                         i.print = False
                         peso = peso - i.peso
+                        premio = premio - i.premio
                     else:
                         i.print = True
                         peso = peso + i.peso
+                        premio = premio + i.premio
     pg.display.update()
 
 done = False
@@ -105,6 +108,16 @@ while done == False:
     textsurface = myfont.render(text, False, (255, 255, 255))
     posX = 10
     posY = 80
+    screen.blit(textsurface, (posX, posY))
+    text = "No total você conseguiu " + str(premio) + " moedas"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 10
+    posY = 110
+    screen.blit(textsurface, (posX, posY))
+    text = "Poderia ter conseguido " + str(res.total) + " moedas"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 10
+    posY = 140
     screen.blit(textsurface, (posX, posY))
     for i in res.treasures:
         pg.draw.circle(screen, Settings.BLUE, i.pos, 40)
