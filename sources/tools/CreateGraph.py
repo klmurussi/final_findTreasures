@@ -9,7 +9,7 @@ listPOS = []
 def nodes(graph):
     number = rand.randint(10, 15)
     #number = 39
-    print(number)
+    # print(number)
     num = 1
     start = graph.add_node(0, 45, 80)
     end = graph.add_node(21, 710, 540)
@@ -25,5 +25,5 @@ def nodes(graph):
             graph.add_node(num, x, y)
             num = num + 1
             listPOS.append((x, y))
-            if num == number+ 1:
+            if num == number + 1:
                 return ((start, end))

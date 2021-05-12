@@ -25,7 +25,7 @@ while distance == inf:
     CreateEdges.edges(graph, start, end)
     distance = graph.dijkstra_end(start, end)
 
-#print("distancia", distance)
+""" print("distancia", distance) """
 qtd = graph.qtdTreasures()
 
 weight = str(rand.randint(30, 50))
@@ -41,7 +41,7 @@ premio = 0
 
 while done == False:
     screen.fill(Settings.BLACK)
-    screen.blit (Images.bau, (0, 0))
+    screen.blit(Images.bau, (0, 0))
     text = "Bem vindo ao Run Away 2"
     textsurface = myfont.render(text, False, (255, 255, 255))
     posX = 370
@@ -57,7 +57,6 @@ while done == False:
     posX = 280
     posY = 90
     screen.blit(textsurface, (posX, posY))
-    
 
     text = "Confirmar"
     textsurface = myfont.render(text, False, (255, 255, 255))
@@ -76,7 +75,7 @@ while done == False:
             sys.exit()
         if event.type == pg.MOUSEBUTTONUP:
             if confirmar.collidepoint(event.pos):
-                if (peso <= int (weight)):
+                if (peso <= int(weight)):
                     done = True
             for i in graph.treasures:
                 if i.button.collidepoint(event.pos):
@@ -91,7 +90,6 @@ while done == False:
     pg.display.update()
 
 done = False
-
 while done == False:
     screen.fill(Settings.BLACK)
     text = "As melhores opções são azuis"
@@ -130,20 +128,46 @@ while done == False:
     Sprites.treasure_list.draw(screen)
     graph.premio(screen)
     for event in pg.event.get():
-            if event.type == pg.QUIT:
-                pg.quit()
-                sys.exit()
-            if event.type == pg.MOUSEBUTTONUP:
-                done = True
+        if event.type == pg.QUIT:
+            pg.quit()
+            sys.exit()
+        if event.type == pg.MOUSEBUTTONUP:
+            done = True
 
     pg.display.update()
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit()
+done = False
 
+while done == False:
+    screen.fill(Settings.BLACK)
+    text = "Agora você tem que escapar da selva, mas cuidado"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 150
+    posY = 280
+    screen.blit(textsurface, (posX, posY))
+    text = "se você não achar o menor caminho, vai perder moedas"
+    textsurface = myfont.render(text, False, (255, 255, 255))
+    posX = 150
+    posY = 300
+    screen.blit(textsurface, (posX, posY))
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            sys.exit()
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            done = True
+        elif event.type == pg.KEYDOWN:
+            done = True
+
+    pg.display.update()
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            sys.exit()
 while True:
-    #RUN
     screen.fill(Settings.WHITE)
     x = 0
     y = 0
@@ -183,6 +207,11 @@ while True:
         screen.blit(textsurface, (posX, posY))
 
     Sprites.all_sprites_list.draw(screen)
+    text = "Você tem " + str(premio) + " moedas"
+    textsurface = myfont.render(text, False, (0, 0, 0))
+    posX = 550
+    posY = 20
+    screen.blit(textsurface, (posX, posY))
     #graph.draw(screen, start, end)
 
     for event in pg.event.get():
@@ -190,8 +219,7 @@ while True:
             pg.quit()
             sys.exit()
         for box in input_boxes:
-            box.handle_event(event, distance, screen)
-
+            premio = box.handle_event(event, distance, screen, premio)
 
     for box in input_boxes:
         box.update()

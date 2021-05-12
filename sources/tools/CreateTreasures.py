@@ -9,7 +9,7 @@ listPOS = []
 def treasures(graph):
     number = rand.randint(5, 10)
     #number = 7
-    print(number)
+    # print(number)
     num = 1
     while (num != (number+1)):
         x = rand.randint(50, 700)
@@ -20,6 +20,7 @@ def treasures(graph):
             if abs(k[0] - x) < 70 and abs(k[1] - y) < 70:
                 mark = True
         if mark == False:
-            listPOS.append((x,y))
-            graph.add_treasure(num, x, y, rand.randint(10, 20), rand.randint(50, 100))
+            listPOS.append((x, y))
+            graph.add_treasure(num, x, y, rand.randint(
+                10, 20), rand.randint(50, 100))
             num = num + 1

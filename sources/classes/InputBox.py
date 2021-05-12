@@ -1,10 +1,11 @@
-import pygame as pg 
+import pygame as pg
 
 pg.font.init()
 
 COLOR_INACTIVE = pg.Color('lightskyblue3')
 COLOR_ACTIVE = pg.Color('dodgerblue2')
 FONT = pg.font.Font(None, 32)
+
 
 class InputBox:
 
@@ -15,7 +16,7 @@ class InputBox:
         self.txt_surface = FONT.render(text, True, self.color)
         self.active = False
 
-    def handle_event(self, event, distance, screen):
+    def handle_event(self, event, distance, screen, premio):
         if event.type == pg.MOUSEBUTTONDOWN:
             # If the user clicked on the input_box rect.
             if self.rect.collidepoint(event.pos):
@@ -31,22 +32,37 @@ class InputBox:
                     if (str(distance) == self.text):
                         while(1):
                             #print ("acertou mizeravi")
-                            screen.fill((0,0,0))
-                            text = FONT.render("YOU WIN. PRESS ENTER TO EXIT", True, (255,255,255))
+                            screen.fill((0, 0, 0))
+                            text = FONT.render(
+                                "VOCE VENCEU. PRESS ENTER TO EXIT", True, (255, 255, 255))
                             screen.blit(text, (220, 280))
+                            text = FONT.render(
+                                "COM "+str(premio)+" MOEDAS", True, (255, 255, 255))
+                            screen.blit(text, (220, 300))
                             pg.display.update()
                             for event in pg.event.get():
                                 if event.type == pg.KEYDOWN:
-                                    print ("a")
                                     pg.quit()
-                    print(self.text)
-                    self.text = ''
+                    else:
+                        self.text = ''
+                        if(premio-50 < 0):
+                            while(1):
+                                screen.fill((0, 0, 0))
+                                text = FONT.render(
+                                    "VOCÊ PERDEU TODAS AS MOEDAS, E SE PERDEU NA FLORESTA", True, (255, 255, 255))
+                                screen.blit(text, (50, 280))
+                                pg.display.update()
+                                for event in pg.event.get():
+                                    if event.type == pg.KEYDOWN:
+                                        pg.quit()
+                        return premio-50
                 elif event.key == pg.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
                     self.text += event.unicode
                 # Re-render the text.
-                self.txt_surface = FONT.render(self.text, True, (0,0,0))
+                self.txt_surface = FONT.render(self.text, True, (0, 0, 0))
+        return premio
 
     def update(self):
         # Resize the box if the text is too long.
