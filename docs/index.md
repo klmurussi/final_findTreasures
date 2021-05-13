@@ -1,4 +1,4 @@
-# Run away
+# Run away 2
 
 ## O que é o nosso projeto?
   É um jogo, onde jogador deve escolher os melhores tesouros para obter a maior quantidade de moedas, então ele deve adivinhar o caminho mais curto para fora da floresta para não perder as moedas.
@@ -20,9 +20,9 @@
 
 ![Imagem dos báus já selecionados](images/selected-treasure.png)
 
-### Imagem do Run Away
+### Parte da fuga da floresta
 
-![Parte da fuga do jogo](images/runaway.png)
+![Imagem da parte da fuga do jogo](images/runaway.png)
 
 
 ## Vídeo da dupla
