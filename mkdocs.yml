@@ -8,10 +8,14 @@ theme:
     primary: purple
     accent: purple
 
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+
 extra_css:
   - stylesheets/extra.css
 
 nav:
   - Início: index.md
   - Ambiete de desenvolvimento: ambiente.md
-  - Algoritmo gerador de árvore: gerador.md
+  - Algoritmos utilizados: algoritmos.md

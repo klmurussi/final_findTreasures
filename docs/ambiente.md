@@ -19,4 +19,8 @@ O projeto foi criado em um ambiente de desenvolvimento linux utilizando a IDE [V
 4. Caso esteja utilizando o VSCode, é necessário instalar as extensões [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) e [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 
 
 ## Uso 
-Para uso do projeto basta rodar o projeto a partir a partir da pasta do projeto, não a partir da pasta sources, utilizando o VSCode ou a linha de comando. Rodar o projeto a partir de uma pasta diferente da pasta do projeto causa problemas de pathing.
+Para uso do projeto basta rodar o projeto a partir a partir da pasta do projeto
+
+  ```
+  python3 sources/main.py
+  ```
