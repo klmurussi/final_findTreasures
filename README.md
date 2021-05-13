@@ -9,11 +9,9 @@
 | 16/0032903  |  Júlio César Schneider Martins |
 | 18/0042378  |  Kathlyn Lara Murussi |
 
-## Sobre 
-O projeto visa criar um mapa aleatório e o jogador deve achar o menor caminho de A pra B. 
+## Documentação
 
-## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+Acesse nossa documentação [aqui](https://projeto-de-algoritmos.github.io/final_findTreasures/)
 
 
 
