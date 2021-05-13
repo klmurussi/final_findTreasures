@@ -163,10 +163,7 @@ while done == False:
             done = True
 
     pg.display.update()
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            pg.quit()
-            sys.exit()
+    
 while True:
     screen.fill(Settings.WHITE)
     x = 0
