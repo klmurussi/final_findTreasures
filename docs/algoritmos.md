@@ -48,7 +48,7 @@ def add_edge(self, src, dest, weight):
 
 
 
-				
+## Algoritmos ambiciosos e Grafos (Dijkstra)				
 
 Além disso, foi utilizado o algoritmo de Dijkstra para o menor caminho que além de um algorimo para grafos é um algoritmo ambicioso.
 
@@ -76,6 +76,8 @@ def dijkstra_end(self, start, end):
 									pq.add((newDist, nextVert))
 			return distance[end]
 ```
+
+## Programação Dinâmica (Knapsack)
 
 Por último foi utilizado o algoritmo Knapsack de programação dinâmica.
 
